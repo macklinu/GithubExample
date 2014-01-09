@@ -1,0 +1,101 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.0.+'
+    }
+}
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+    productFlavors {
+        defaultFlavor {
+            proguardFile 'proguard-rules.txt'
+        }
+    }
+    sourceSets {
+        instrumentTest.setRoot('src/test')
+    }
+}
+
+apply plugin: 'android-unit-test'
+
+ext.androidAnnotationsVersion= '3.0';
+ext.springFrameworkVersion='1.0.1.RELEASE'
+
+configurations {
+    apt
+}
+
+dependencies {
+    //gson
+    compile 'com.google.code.gson:gson:2.2.4'
+
+    //spring
+    compile "org.springframework.android:spring-android-rest-template:${springFrameworkVersion}"
+
+    //android annotations
+    apt "org.androidannotations:androidannotations:${androidAnnotationsVersion}"
+    compile "org.androidannotations:androidannotations-api:${androidAnnotationsVersion}"
+
+    //testing
+    instrumentTestCompile 'org.robolectric:robolectric:2.2'
+    instrumentTestCompile 'junit:junit:4.11'
+    instrumentTestCompile 'com.squareup:fest-android:1.0.+'
+    testCompile 'org.robolectric:robolectric:2.2'
+    testCompile 'junit:junit:4.11'
+    testCompile 'com.squareup:fest-android:1.0.+'
+}
+
+/* annotations stuff */
+def getSourceSetName(variant) {
+    return new File(variant.dirName).getName();
+}
+
+android.applicationVariants.all { variant ->
+    def aptOutputDir = project.file("build/source/apt")
+    def aptOutput = new File(aptOutputDir, variant.dirName)
+    println "****************************"
+    println "variant: ${variant.name}"
+    println "manifest:  ${variant.processResources.manifestFile}"
+    println "aptOutput:  ${aptOutput}"
+    println "****************************"
+
+    android.sourceSets[getSourceSetName(variant)].java.srcDirs += aptOutput.getPath()
+
+    variant.javaCompile.options.compilerArgs += [
+            '-processorpath', configurations.apt.getAsPath(),
+            '-processor', 'org.androidannotations.AndroidAnnotationProcessor',
+            '-AandroidManifestFile=' + variant.processResources.manifestFile,
+            '-s', aptOutput
+    ]
+
+    variant.javaCompile.source = variant.javaCompile.source.filter { p ->
+        return !p.getPath().startsWith(aptOutputDir.getPath())
+    }
+
+    variant.javaCompile.doFirst {
+        aptOutput.mkdirs()
+    }
+}
+/* end of annotations stuff */
