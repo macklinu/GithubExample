@@ -1,6 +1,7 @@
 package nu.mackli.githubexample.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -51,6 +52,8 @@ public class SearchFragment extends Fragment {
                     if (response.getMessage() == null) {
                         // good to go
                         makeToast(response.getName() + " is the name.");
+                        // create the UserFragment
+                        showUserFragment(response);
                     } else if (response.getMessage().equals("Not Found")) {
                         // then there was an error where the user was not found
                         makeToast("User not found");
@@ -67,6 +70,20 @@ public class SearchFragment extends Fragment {
                 }
             });
         }
+    }
+
+    @UiThread
+    public void showUserFragment(User user) {
+        // build a fragment with Android Annotations
+        UserFragment userFragment = UserFragment_.builder()
+                .user(user)
+                .build();
+        // create and complete the fragment transaction
+        FragmentTransaction fragmentTransaction = getFragmentManager()
+                .beginTransaction();
+        fragmentTransaction.replace(R.id.container, userFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @UiThread

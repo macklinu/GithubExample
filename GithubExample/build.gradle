@@ -48,17 +48,20 @@ configurations {
 }
 
 dependencies {
-    //gson
+    // picasso
+    compile 'com.squareup.picasso:picasso:2.1.1'
+
+    // gson
     compile 'com.google.code.gson:gson:2.2.4'
 
-    //spring
+    // spring
     compile "org.springframework.android:spring-android-rest-template:${springFrameworkVersion}"
 
-    //android annotations
+    // android annotations
     apt "org.androidannotations:androidannotations:${androidAnnotationsVersion}"
     compile "org.androidannotations:androidannotations-api:${androidAnnotationsVersion}"
 
-    //testing
+    // testing
     instrumentTestCompile 'org.robolectric:robolectric:2.2'
     instrumentTestCompile 'junit:junit:4.11'
     instrumentTestCompile 'com.squareup:fest-android:1.0.+'

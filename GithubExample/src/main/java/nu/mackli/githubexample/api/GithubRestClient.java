@@ -5,8 +5,6 @@ import org.androidannotations.annotations.rest.Rest;
 import org.androidannotations.api.rest.RestClientSupport;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 
-import java.util.List;
-
 import nu.mackli.githubexample.models.User;
 
 /**
