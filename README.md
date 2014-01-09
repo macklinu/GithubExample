@@ -8,8 +8,8 @@ Here's an example that uses some really nice Android libraries to make Android a
 
 ### [Picasso](http://square.github.io/picasso/)
 
-A powerful image downloading and caching library
+> A powerful image downloading and caching library
 
 ### [GSON](https://code.google.com/p/google-gson/)
 
-Convert JSON objects to Java objects and vice-versa
+> Convert JSON objects to Java objects and vice-versa
