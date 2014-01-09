@@ -1,7 +1,6 @@
 package nu.mackli.githubexample.fragments;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;

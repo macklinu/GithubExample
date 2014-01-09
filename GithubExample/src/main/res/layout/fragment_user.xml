@@ -3,21 +3,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              style="@style/Fragment"
+              android:gravity="center">
 
     <ImageView
         android:id="@+id/gravatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/Fragment.Item.TextView"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        style="@style/Fragment.Item.TextView"
+        android:fontFamily="monospace"
+        android:gravity="center"/>
 
 </LinearLayout>
