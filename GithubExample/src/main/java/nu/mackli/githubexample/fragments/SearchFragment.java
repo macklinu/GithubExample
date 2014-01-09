@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
 import nu.mackli.githubexample.R;
+import nu.mackli.githubexample.activities.UserActivity_;
 import nu.mackli.githubexample.api.GithubRestApi;
 import nu.mackli.githubexample.api.RestCallback;
 import nu.mackli.githubexample.models.User;
@@ -52,8 +53,8 @@ public class SearchFragment extends Fragment {
                     if (response.getMessage() == null) {
                         // good to go
                         makeToast(response.getName() + " is the name.");
-                        // create the UserFragment
-                        showUserFragment(response);
+                        // start the UserActivity
+                        startUserActivity(response);
                     } else if (response.getMessage().equals("Not Found")) {
                         // then there was an error where the user was not found
                         makeToast("User not found");
@@ -73,17 +74,11 @@ public class SearchFragment extends Fragment {
     }
 
     @UiThread
-    public void showUserFragment(User user) {
-        // build a fragment with Android Annotations
-        UserFragment userFragment = UserFragment_.builder()
+    public void startUserActivity(User user) {
+        UserActivity_
+                .intent(getActivity())
                 .user(user)
-                .build();
-        // create and complete the fragment transaction
-        FragmentTransaction fragmentTransaction = getFragmentManager()
-                .beginTransaction();
-        fragmentTransaction.replace(R.id.container, userFragment)
-                .addToBackStack(null)
-                .commit();
+                .start();
     }
 
     @UiThread
