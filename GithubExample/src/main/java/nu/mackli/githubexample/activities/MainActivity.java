@@ -18,9 +18,6 @@ import nu.mackli.githubexample.fragments.SearchFragment_;
 @OptionsMenu(R.menu.main)
 public class MainActivity extends Activity {
 
-    @ViewById
-    ProgressBar progressBar;
-
     @AfterViews
     public void afterViews() {
         setFragment();

@@ -51,8 +51,8 @@ public class SearchFragment extends Fragment {
                     setProgressBarVisible(ProgressBar.GONE);
                     if (response.getMessage() == null) {
                         // good to go
-                        makeToast(response.getName() + " is the name.");
                         // start the UserActivity
+                        clearSearchInput();
                         startUserActivity(response);
                     } else if (response.getMessage().equals("Not Found")) {
                         // then there was an error where the user was not found
@@ -88,5 +88,10 @@ public class SearchFragment extends Fragment {
     @UiThread
     public void setProgressBarVisible(int visibility) {
         progressBar.setVisibility(visibility);
+    }
+
+    @UiThread
+    public void clearSearchInput() {
+        searchInput.setText(""); // clear input for when we return to search again
     }
 }
