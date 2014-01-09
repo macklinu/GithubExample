@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
@@ -27,6 +28,11 @@ public class MainActivity extends Activity {
     @AfterViews
     public void afterViews() {
         setFragment();
+    }
+
+    @OptionsItem
+    void settings() {
+        getActionBar().setTitle("Whoa");
     }
 
     private void setFragment() {

@@ -37,7 +37,7 @@ public class SearchFragment extends Fragment {
     @Click
     void searchButton() {
         String searchTerm = searchInput.getText().toString();
-        if (searchTerm != null) {
+        if (searchTerm != null && !searchTerm.isEmpty()) {
             // make API call
             api.getUser(searchTerm, new RestCallback<User>() {
                 @Override
