@@ -9,5 +9,4 @@ public interface RestCallback<T> {
     public void onBegin();
     public void onSuccess(T response);
     public void onError(HttpClientErrorException error);
-
 }

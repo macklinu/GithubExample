@@ -14,5 +14,4 @@ import nu.mackli.githubexample.models.User;
 public interface GithubRestClient extends RestClientSupport {
     @Get("/users/{username}")
     public User getUser(String username);
-
 }

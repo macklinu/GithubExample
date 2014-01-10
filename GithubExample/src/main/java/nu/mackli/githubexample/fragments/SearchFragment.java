@@ -34,8 +34,8 @@ public class SearchFragment extends Fragment {
     @ViewById
     ProgressBar progressBar;
 
-    @Click
-    void searchButton() {
+    @Click(R.id.search_button)
+    void onButtonClick() {
         String searchTerm = searchInput.getText().toString();
         if (searchTerm != null && !searchTerm.isEmpty()) {
             // make API call
