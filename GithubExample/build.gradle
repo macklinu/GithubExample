@@ -3,7 +3,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.android.tools.build:gradle:0.6.+' // for Android Studio version <= 0.3.9
+        // classpath 'com.android.tools.build:gradle:0.7.+' // for Android Studio version >= 0.4.x
         classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.0.+'
     }
 }
